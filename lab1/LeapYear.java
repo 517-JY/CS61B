@@ -1,3 +1,5 @@
+// import com.sun.org.apache.xpath.internal.functions.FuncFalse;
+
 /** Class that determines whether or not a year is a leap year.
  *  @author YOUR NAME HERE
  */
@@ -28,6 +30,21 @@ public class LeapYear {
                 System.out.printf("%s is not a valid number.\n", args[i]);
             }
         }
+    }
+
+    /** Test whether the given year is a leap year or not.
+     *  @param  year to be analyzed
+     * */
+    public static boolean isLeapYear(int year)
+    {
+        if (year % 400 == 0)
+        {
+            return true;
+        } else if (year % 4 == 0 && year % 100 != 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
 
