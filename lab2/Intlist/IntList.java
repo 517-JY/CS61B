@@ -93,7 +93,7 @@ public class IntList {
 
         A.rest = B;
 
-//        return ptr;
+        return ptr;
     }
 
     /**
@@ -117,7 +117,7 @@ public class IntList {
         }
         ptr.rest = new IntList(B.first, B.rest);
 
-//        return res;
+        return res;
     }
 
 
