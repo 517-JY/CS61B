@@ -1,6 +1,6 @@
 public class Planet {
 	/** Its current x position */
-	public double xxPos; 
+	public double xxPos;
 
 	/** Its current y position */
 	public double yyPos;
@@ -18,9 +18,9 @@ public class Planet {
 	    planet (for example, jupiter.gif)*/
 	public String imgFileName;
 
-	public static final double G = 6.67e-11;
+	private static final double G = 6.67e-11;
 
-
+	
     /** First Constructor */
 	public Planet(double xP, double yP, double xV,
 				  double yV, double m, String img) {

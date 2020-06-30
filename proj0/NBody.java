@@ -17,13 +17,13 @@ public class NBody {
 	   in that file.
 	 */
 	public static Planet[] readPlanets(String filepath) {
-		Planet[] planets = new Planet[5];
-		int i = 0;
-
 		In in = new In(filepath);
 
 		int number = in.readInt();
 		double radius = in.readDouble();
+
+		Planet[] planets = new Planet[number];
+		int i = 0;
 
 		while (i < planets.length) {
 			double xxPOS = in.readDouble();
@@ -44,7 +44,6 @@ public class NBody {
 	/**
 	 * Creates the main method.
 	 */
-
 	public static void main(String[] args) {
 		double T = Double.parseDouble(args[0]);
 		double dt = Double.parseDouble(args[1]);
@@ -65,18 +64,18 @@ public class NBody {
 		/* creates simulation using discretizing time */
 		for (double ti = 0.0; ti <= T; ti = ti + dt) {
 			/* create an xForces array and yForces array */
-			double[] xForces = new double[5];
-			double[] yForces = new double[5];
+			double[] xForces = new double[planets.length];
+			double[] yForces = new double[planets.length];
 
 			/* calculates the nex x and y forces for each planet, storing these in xForces
 			   and yForces arrays respectively. */
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < planets.length; i++) {
 				xForces[i] = planets[i].calcNetForceExertedByX(planets);
 				yForces[i] = planets[i].calcNetForceExertedByY(planets);
 			}
 
 			/* updates each planet's position */
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < planets.length; i++) {
 				planets[i].update(dt, xForces[i], yForces[i]);
 			}
 
@@ -91,7 +90,7 @@ public class NBody {
 
 			/* Shows the drawing to the screen */
 			StdDraw.show();
-			StdDraw.pause(1);
+			StdDraw.pause(10);
 		}
 
 		/* prints out the final state of the universe in the same format as the input. */
