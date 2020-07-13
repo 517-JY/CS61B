@@ -1,6 +1,6 @@
 /** The array deque is designed as circular type. */
-public class ArrayDeque<Glorp> {
-    private Glorp[] items;
+public class ArrayDeque<T> {
+    private T[] items;
     private int size;
 
     /** Start the array at 4 -- picked index arbitrarily as described in demo.  */
@@ -9,12 +9,17 @@ public class ArrayDeque<Glorp> {
 
     /** Creates an empty array deque with starting size 8. */
     public ArrayDeque() {
-        items = (Glorp[]) new Object[8];
+        items = (T[]) new Object[8];
         size = 0;
     }
 
+    /** Returns true if deque is empty, false otherwise.  */
+    public boolean isEmpty() {
+        return (size == 0);
+    }
+
     /** Adds an item of type Glorp to the front of the array deque */
-    public void addFirst(Glorp g) {
+    public void addFirst(T g) {
         if (size == items.length) {
             resize(size * 2);
         }
@@ -29,7 +34,7 @@ public class ArrayDeque<Glorp> {
     }
 
     /** Adds an item of type Glorp to the back of the array deque */
-    public void addLast(Glorp g) {
+    public void addLast(T g) {
         if (size == items.length) {
             resize(size * 2);
         }
@@ -44,19 +49,19 @@ public class ArrayDeque<Glorp> {
     }
 
     /** Returns the item at the front of the array deque */
-    public Glorp getFirst() {
+    public T getFirst() {
         int index = (nextFirst + 1) % items.length;
         return items[index];
     }
 
     /** Returns the item at the end of the array deque */
-    public Glorp getLast() {
+    public T getLast() {
         int index = (nextLast - 1) % items.length;
         return items[index];
     }
 
     /** Returns the item at specified index of the array deque */
-    public Glorp get(int index) {
+    public T get(int index) {
         return items[index];
     }
 
@@ -64,12 +69,12 @@ public class ArrayDeque<Glorp> {
      *  If no such item exists, return null.
      *  Shrink item size as needed to ensure the usage factor always be at least 25%.
      */
-    public Glorp removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
         nextFirst = (nextFirst + 1) % items.length;
-        Glorp target = items[nextFirst];
+        T target = items[nextFirst];
         items[nextFirst]  = null;
         size--;
 
@@ -84,12 +89,12 @@ public class ArrayDeque<Glorp> {
      *  If no such item exists, return null.
      *  Shrink item size as needed to ensure the usage factor always be at least 25%.
      */
-    public Glorp removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
         nextLast = (nextLast - 1) % items.length;
-        Glorp target = items[nextLast];
+        T target = items[nextLast];
         items[nextLast] = null;
         size--;
 
@@ -102,7 +107,7 @@ public class ArrayDeque<Glorp> {
 
     /** Array deque resizing based on requirement */
     private void resize(int cap) {
-        Glorp[] a = (Glorp[]) new Object[cap];
+        T[] a = (T[]) new Object[cap];
         System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
         System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextFirst + 1);
         items = a;
@@ -112,7 +117,7 @@ public class ArrayDeque<Glorp> {
 
     /** Shrinks array deque. */
     private void shrink() {
-        Glorp[] a = (Glorp[]) new Object[size * 2];
+        T[] a = (T[]) new Object[size * 2];
         System.arraycopy(items, (nextFirst + 1) % items.length, a, 0, size);
         items = a;
         nextLast = size;
