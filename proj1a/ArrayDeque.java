@@ -90,18 +90,6 @@ public class ArrayDeque<T> {
         nextLast = addOne(nextLast);
     }
 
-    /** Returns the item at the front of the array deque. */
-    public T getFirst() {
-        int index = addOne(nextFirst);
-        return items[index];
-    }
-
-    /** Returns the item at the end of the array deque. */
-    public T getLast() {
-        int index = minusOne(nextLast);
-        return items[index];
-    }
-
     /** Returns the item at the given index of the array deque.
      * @param index as specified index
      *  If no such item exists, return null
@@ -182,6 +170,17 @@ public class ArrayDeque<T> {
     /** Returns the size of the array deque. */
     public int size() {
         return size;
+    }
+
+    /** Prints the items in the deque from first to last,
+     *  separated by a space.
+     */
+    public void printDeque() {
+        for (int i = addOne(nextFirst); i != nextLast; ) {
+            System.out.print(items[i] + " ");
+            i = addOne(i);
+        }
+        System.out.println();
     }
 
 }
